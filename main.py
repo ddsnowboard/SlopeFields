@@ -52,7 +52,10 @@ def draw(equation, dims):
 			curry = y * deltay
 			turtle.pu()
 			turtle.goto(currx * xratio, curry * yratio)
-			turtle.seth((180/pi)*(atan(equation(x, y))))
+			try:
+				turtle.seth((180/pi)*(atan(equation(x, y))))
+			except ZeroDivisionError:
+				turtle.seth(90)
 			turtle.forward(FIELD_LINE_LENGTH/2)
 			turtle.pd()
 			turtle.backward(FIELD_LINE_LENGTH)
