@@ -4,10 +4,13 @@ def draw(equation, dims):
 	TICK_MARK_LENGTH = 10
 	FIELD_LINE_LENGTH = 18
 	SPACE_FROM_LABEL = 15
+	RESOLUTION = 20
+	if RESOLUTION % 2 != 0:
+		raise Exception("RESOLUTION must be even")
 	xlen = dims['x']
 	ylen = dims['y']
-	deltax = xlen/20
-	deltay = ylen/20
+	deltax = xlen/RESOLUTION
+	deltay = ylen/RESOLUTION
 	width = turtle.window_width()-55
 	height = turtle.window_height()-30
 	xratio = width/xlen
@@ -22,29 +25,29 @@ def draw(equation, dims):
 	turtle.setheading(270)
 	turtle.pd()
 	turtle.forward(height)
-	for i in range(21):
+	for i in range(RESOLUTION+1):
 		turtle.pu()
-		turtle.goto((width/-2)+((width/20)*i), TICK_MARK_LENGTH/2)
+		turtle.goto((width/-2)+((width/RESOLUTION)*i), TICK_MARK_LENGTH/2)
 		turtle.seth(270)
 		turtle.pd()
 		turtle.forward(TICK_MARK_LENGTH)
 		turtle.pu()
 		turtle.forward(SPACE_FROM_LABEL)
-		turtle.write((-1*dims['x']/2)+(dims['x']/20)*i, False, "center")
-	for i in range(21):
+		turtle.write(round((-1*dims['x']/2)+(dims['x']/RESOLUTION)*i, 2), False, "center")
+	for i in range(RESOLUTION+1):
 		turtle.pu()
-		turtle.goto(TICK_MARK_LENGTH/2, (height/-2)+((height/20)*i))
+		turtle.goto(TICK_MARK_LENGTH/2, (height/-2)+((height/RESOLUTION)*i))
 		turtle.seth(180)
 		turtle.pd()
 		turtle.forward(TICK_MARK_LENGTH)
-		if i != 10:
+		if i != RESOLUTION/2:
 			turtle.left(25)
 			turtle.pu()
 			turtle.forward(SPACE_FROM_LABEL)
-			turtle.write((dims['y']/-2)+(dims['y']/20)*i, False, "center")
+			turtle.write(round((dims['y']/-2)+(dims['y']/RESOLUTION)*i, 2), False, "center")
 	turtle.pen(pencolor="green")
-	for x in range(-10, 11):
-		for y in range(-10, 11):
+	for x in range(int(RESOLUTION/-2), int(RESOLUTION/2+1)):
+		for y in range(int(RESOLUTION/-2), int(RESOLUTION/2+1)):
 			currx = x * deltax
 			curry = y * deltay
 			turtle.pu()
