@@ -1,6 +1,5 @@
 import turtle
 from math import atan, tan, cos, acos, sin, asin, pi, e, fabs
-from WillsLib import myRange
 def draw(equation, dims):
 	TICK_MARK_LENGTH = 10
 	FIELD_LINE_LENGTH = 18
@@ -11,6 +10,8 @@ def draw(equation, dims):
 	deltay = ylen/20
 	width = turtle.window_width()-55
 	height = turtle.window_height()-30
+	xratio = width/xlen
+	yratio = height/ylen
 	turtle.pu()
 	turtle.goto(width/-2, 0)
 	turtle.setheading(0)
@@ -46,9 +47,8 @@ def draw(equation, dims):
 		for y in range(-10, 11):
 			currx = x * deltax
 			curry = y * deltay
-			print(currx, curry)
 			turtle.pu()
-			turtle.goto(currx, curry)
+			turtle.goto(currx * xratio, curry * yratio)
 			turtle.seth((180/pi)*(atan(equation(x, y))))
 			turtle.forward(FIELD_LINE_LENGTH/2)
 			turtle.pd()
