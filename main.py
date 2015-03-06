@@ -5,6 +5,10 @@ def draw(equation, dims):
 	TICK_MARK_LENGTH = 10
 	FIELD_LINE_LENGTH = 18
 	SPACE_FROM_LABEL = 15
+	xlen = dims['x']
+	ylen = dims['y']
+	deltax = xlen/20
+	deltay = ylen/20
 	width = turtle.window_width()-55
 	height = turtle.window_height()-30
 	turtle.pu()
@@ -38,11 +42,13 @@ def draw(equation, dims):
 			turtle.forward(SPACE_FROM_LABEL)
 			turtle.write((dims['y']/-2)+(dims['y']/20)*i, False, "center")
 	turtle.pen(pencolor="green")
-	for x in myRange(dims['x']/-2, (dims['x']/2)+1, dims['x']/20):
-		for y in myRange(dims['y']/-2, dims['y']/2, dims['y']/20):
-			print(x, y)
+	for x in range(-10, 11):
+		for y in range(-10, 11):
+			currx = x * deltax
+			curry = y * deltay
+			print(currx, curry)
 			turtle.pu()
-			turtle.goto((width/dims['x'])*x, (width/dims['y'])*y)
+			turtle.goto(currx, curry)
 			turtle.seth((180/pi)*(atan(equation(x, y))))
 			turtle.forward(FIELD_LINE_LENGTH/2)
 			turtle.pd()
