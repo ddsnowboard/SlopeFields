@@ -1,7 +1,6 @@
 import turtle
 from math import atan, tan, cos, acos, sin, asin, pi, e, fabs
 from WillsLib import myRange
-# Make the dimensions editable. 
 def draw(equation, dims):
 	TICK_MARK_LENGTH = 10
 	FIELD_LINE_LENGTH = 18
@@ -29,7 +28,7 @@ def draw(equation, dims):
 		turtle.write((-1*dims['x']/2)+(dims['x']/20)*i, False, "center")
 	for i in range(21):
 		turtle.pu()
-		turtle.goto(TICK_MARK_LENGTH/2, (height/2)-((height/20)*i))
+		turtle.goto(TICK_MARK_LENGTH/2, (height/-2)+((height/20)*i))
 		turtle.seth(180)
 		turtle.pd()
 		turtle.forward(TICK_MARK_LENGTH)
@@ -37,10 +36,11 @@ def draw(equation, dims):
 			turtle.left(25)
 			turtle.pu()
 			turtle.forward(SPACE_FROM_LABEL)
-			turtle.write((dims['y']/2)-(dims['y']/20)*i, False, "center")
+			turtle.write((dims['y']/-2)+(dims['y']/20)*i, False, "center")
 	turtle.pen(pencolor="green")
-	for x in myRange(dims['x']/-2, (dims['x']/2), dims['x']/20):
+	for x in myRange(dims['x']/-2, (dims['x']/2)+1, dims['x']/20):
 		for y in myRange(dims['y']/-2, dims['y']/2, dims['y']/20):
+			print(x, y)
 			turtle.pu()
 			turtle.goto((width/dims['x'])*x, (width/dims['y'])*y)
 			turtle.seth((180/pi)*(atan(equation(x, y))))
