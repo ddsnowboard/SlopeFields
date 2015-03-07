@@ -21,6 +21,7 @@ class App(tk.Tk):
 		self.y_frame.pack()
 		self.button = tk.Button(self, text="Generate", command=self.generate)
 		self.button.pack()
+		self.mainloop()
 	def generate(self):
 		draw(eval("lambda x, y: "+self.equation_frame.get()), {'x': int(self.x_frame.get()), 'y': int(self.y_frame.get())})
 def draw(equation, dims):
